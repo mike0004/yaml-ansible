@@ -1,0 +1,65 @@
+---
+# block notation (newlines become spaces)
+what_is_this:
+  item
+  bar
+  stuff that is concencated
+  same as oneline
+
+sequence_aka_array:
+  - [a,b,c]
+  - [4,5,6]
+
+# Nest hash
+next_hast:
+  subkey:
+    subsubkey1: 5
+    subsubkey2: 6
+    another:
+      somethingelse: 'Important!'
+
+# Inline hash:
+inline_hash: {nr1: 5, nr2: 6}
+
+# literal style (newlines are preserved)
+content1: |
+  Arbitrary free text
+  over "multiple lines" stopping
+  after indentation changes...
+
+# folded style (folded newlines not preserved, no newline appended at end due to -)
+content2: >-
+  Arbitrary free text
+  over "multiple lines" stopping
+  after indentation changes...
+
+# reference
+values:
+- &fqdn http://google.com
+- fqdn: *fqdn  # Reused content
+
+# merge and reuse example: see http://stackoverflow.com/a/9525884/1574942
+default_settings: &default_stuff
+  - install:
+      dir: /usr/local
+      owner: root
+  - config:
+      enabled: false
+my_app: &my_app
+  << : *default_stuff
+  install:
+    owner: my_user
+    dir: /home/my_user    # note: if you don't specify dir, it will be blown away
+  config:
+    enabled: true
+  and_another_thing:
+    foo: bar
+
+sub_app:
+  << : *my_app
+  and_another_thing:
+    something:
+      yeah: 0x4D2
+      num: "\x41"
+
+some_tab_string: "this is a test \"hi\" \v of the EBS"

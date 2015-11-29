@@ -1,0 +1,13 @@
+# ansible-playbook -i "," playbook.yml
+---
+- name: yaml stuff
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+   - yaml_vars_demo.yml
+  tasks:
+  - debug: var={{item}}
+    with_items:
+    - default_settings
+    - my_app
+    - sub_app
